@@ -1,7 +1,6 @@
 	<div id="small-space"></div>
-   <script src="<?php echo base_url(); ?>ckeditor/ckeditor.js"></script> 
+<script src="<?php echo base_url(); ?>ckeditor/ckeditor.js"></script> 
 <script>
-
 $(document).ready(function(){
     var pbudget=$("#pbudget");
 	var cost=$("#cost");
@@ -31,10 +30,9 @@ $(document).ready(function(){
 <div class="agileits-box">
 <header class="agileits-box-header clearfix">
 <h3>Appy for Project</h3><hr />
-
-		<?php foreach ($proposal as $projects): ?>
-	
-  <?php echo form_open_multipart('proposal/edit_proposal/'.$projects['proposal_id']);?>
+<div class="alert alert-info" style="font-size:12px"> This is how you have to fill and apply for a project</div>
+		<?php foreach ($project as $projects): ?>
+  <?php echo form_open_multipart('apply/apply_project/'.$projects['project_id']);?>
          
              <?php echo $this->session->flashdata('msg'); ?>
             <div class="col-md-12 form-group1 group-mail">
@@ -56,7 +54,7 @@ $(document).ready(function(){
            
  <label class="control-label">Proposed Bid Budget</label>
              
-              <input type="text" name="pbudget" class="form-control1" id="pbudget" placeholder=" eg: 20000" value="<?php echo $projects['pbudget'] ?>" required>
+              <input type="text" name="pbudget" class="form-control1" id="pbudget" placeholder=" eg: 20000" value="<?php echo set_value('pbudget'); ?>" required>
                <span class="text-danger"><?php echo form_error('pbudget'); ?></span>
             </div>
             
@@ -64,7 +62,7 @@ $(document).ready(function(){
            
  <label class="control-label">Actual Proposed Budget</label>
              
-              <input type="text" name="total" class="form-control1" id="total" value="<?php echo $projects['abudget'] ?>" required>
+              <input type="text" name="total" class="form-control1" id="total" value="<?php echo set_value('total'); ?>" required>
               <span id="result"></span>
                <span class="text-danger"><?php echo form_error('total'); ?></span>
             </div>
@@ -72,7 +70,7 @@ $(document).ready(function(){
             <div class="col-md-6 form-group1 form-last">
                <label class="control-label">Proposed Duration in Days</label>
              
-   <input type="text" name="duration" class="form-control1" placeholder="eg: 10" value="<?php echo $projects['duration'] ?>" required>
+              <input type="text" name="duration" class="form-control1" placeholder="eg: 10" value="<?php echo set_value('duration'); ?>" required>
                <span class="text-danger"><?php echo form_error('duration'); ?></span>
             </div>
             <div class="clearfix"> </div>
@@ -87,7 +85,7 @@ $(document).ready(function(){
             <div class="col-md-11 form-group1 ">
               <label class="control-label">Project Proposal</label>
               <span class="text-danger"><?php echo form_error('proposal'); ?></span>
-              <textarea id="proposal"  name="proposal"> <?php echo $projects['proposal'] ?></textarea>
+              <textarea id="proposal"  name="proposal"> <?php echo set_value('proposal'); ?></textarea>
                <script type="text/javascript">  
 	     CKEDITOR.replace( 'proposal' );  
 	  </script>  
@@ -100,7 +98,7 @@ $(document).ready(function(){
            
  <label class="control-label">Number of Revision</label>
              
-              <input type="text" class="form-control1" name="revision" placeholder=" eg: 2" value="<?php echo $projects['revision'] ?>" required>
+              <input type="text" class="form-control1" name="revision" placeholder=" eg: 2" value="<?php echo set_value('revision'); ?>" required>
                <span class="text-danger"><?php echo form_error('revision'); ?></span>
             </div>
             
@@ -147,17 +145,8 @@ $(document).ready(function(){
               
              <div class="clearfix"> </div>
           
-             <?php if ($projects['status']=='pending'){ ?>
- <input type="submit" name="submit" class="btn btn-primary col-xs-12" value="Edit Proposal"> 
- <a href="<?php echo base_url('proposal/cancel/'.$projects['proposal_id']); ?>" class="btn btn-danger col-xs-12">Cancel Proposal</a>
-<?php } elseif($projects['status']=='canceled'){ ?>
-
-<a class="btn btn-danger col-xs-12">Proposal Canceled</a>
-
-<?php }else{ ?>
-
-<a  class="btn btn-success col-xs-12">Proposal Approved</a>
-<?php }?>
+            <div class="col-md-12 form-group">
+              <input type="submit" name="submit" class="btn btn-primary" value="Apply">
              
             </div>
           <div class="clearfix"> </div>
